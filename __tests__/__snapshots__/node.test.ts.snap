@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Output as Node should output node 1`] = `
+{
+  "data": [
+    {
+      "children": [
+        {
+          "type": "text",
+          "value": "Hello World",
+        },
+      ],
+      "properties": {
+        "id": "hello-world",
+      },
+      "tagName": "h1",
+      "type": "element",
+    },
+    {
+      "children": [
+        {
+          "type": "text",
+          "value": "sub",
+        },
+      ],
+      "properties": {
+        "id": "sub",
+      },
+      "tagName": "h2",
+      "type": "element",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "type": "text",
+              "value": "1",
+            },
+          ],
+          "properties": {},
+          "tagName": "li",
+          "type": "element",
+        },
+        {
+          "children": [
+            {
+              "type": "text",
+              "value": "2",
+            },
+          ],
+          "properties": {},
+          "tagName": "li",
+          "type": "element",
+        },
+      ],
+      "properties": {},
+      "tagName": "ul",
+      "type": "element",
+    },
+  ],
+  "title": "Hello World",
+  "toc": undefined,
+}
+`;
+
+exports[`Output as Node should support HTML tag 1`] = `
+{
+  "data": [
+    {
+      "children": [
+        {
+          "type": "text",
+          "value": "Hello World",
+        },
+      ],
+      "properties": {
+        "id": "hello-world",
+      },
+      "tagName": "h1",
+      "type": "element",
+    },
+    {
+      "children": [],
+      "name": "test",
+      "properties": {
+        "array": [
+          1,
+          "string",
+          {
+            "obj": true,
+          },
+        ],
+        "number": 1,
+        "object": {
+          "obj": true,
+        },
+        "string": "string",
+      },
+      "type": "component",
+    },
+  ],
+  "title": "Hello World",
+  "toc": undefined,
+}
+`;
+
+exports[`Output as Node should support HTML tag with children 1`] = `
+{
+  "data": [
+    {
+      "children": [
+        {
+          "type": "text",
+          "value": "Hello World",
+        },
+      ],
+      "properties": {
+        "id": "hello-world",
+      },
+      "tagName": "h1",
+      "type": "element",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "type": "text",
+              "value": "children content",
+            },
+          ],
+          "properties": {},
+          "tagName": "p",
+          "type": "element",
+        },
+      ],
+      "name": "test",
+      "properties": {},
+      "type": "component",
+    },
+  ],
+  "title": "Hello World",
+  "toc": undefined,
+}
+`;
+
+exports[`Output as Node should support HTML tag with children markdown 1`] = `
+{
+  "data": [
+    {
+      "children": [
+        {
+          "type": "text",
+          "value": "Hello World",
+        },
+      ],
+      "properties": {
+        "id": "hello-world",
+      },
+      "tagName": "h1",
+      "type": "element",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "value": "blockquote",
+                },
+              ],
+              "properties": {},
+              "tagName": "p",
+              "type": "element",
+            },
+          ],
+          "properties": {},
+          "tagName": "blockquote",
+          "type": "element",
+        },
+      ],
+      "name": "test",
+      "properties": {},
+      "type": "component",
+    },
+  ],
+  "title": "Hello World",
+  "toc": undefined,
+}
+`;
