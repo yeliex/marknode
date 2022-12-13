@@ -1,0 +1,18 @@
+{
+    "$schema": "https://json.schemastore.org/swcrc",
+    "env": {
+        "targets": {
+            "node": 16
+        }
+    },
+    "jsc": {
+        "parser": {
+            "syntax": "typescript",
+            "tsx": false
+        },
+        "target": "es2020"
+    },
+    "module": {
+        "type": "es6"
+    }
+}

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Output as Html should output html 1`] = `
+{
+  "data": [
+    {
+      "content": "<h1 id="hello-world">Hello World</h1><ul><li>123</li><li>123</li></ul><p>asd<br>asd</p><h2 id="asd">asd</h2><p>asd</p><br><p>test content</p>",
+      "type": "html",
+    },
+  ],
+  "title": "Hello World",
+  "toc": [
+    {
+      "id": "hello-world",
+      "level": 1,
+      "title": "Hello World",
+    },
+    {
+      "id": "asd",
+      "level": 2,
+      "title": "asd",
+    },
+  ],
+}
+`;
