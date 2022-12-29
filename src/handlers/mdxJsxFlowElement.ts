@@ -2,19 +2,31 @@ import { type Parent } from 'hast';
 import { type MdxJsxFlowElement } from 'mdast-util-mdx';
 import mdxJsxAttributeHandler from './mdxJsxAttribute.js';
 import mdxJsxExpressionAttributeHandler from './mdxJsxExpressionAttribute.js';
+// @ts-ignore
+import { TAG_NAMES } from 'parse5/lib/common/html.js';
 
 const AttributeHandlers = {
     mdxJsxAttribute: mdxJsxAttributeHandler,
     mdxJsxExpressionAttribute: mdxJsxExpressionAttributeHandler,
 };
 
+const HTMLTagNames = Object.values(TAG_NAMES);
+
+export const attributeHandler = (attributes: MdxJsxFlowElement['attributes']): Record<string, any> => {
+    return attributes.reduce((acc: any, attr: any) => {
+        acc[attr.name] = AttributeHandlers[attr.type as keyof typeof AttributeHandlers](attr);
+
+        return acc;
+    }, {});
+};
+
 const mdxJsxFlowElementHandler = (node: MdxJsxFlowElement, index: number, parent: Parent) => {
-    if (node.name === 'br') {
+    if (HTMLTagNames.includes(node.name)) {
         parent.children[index] = {
             type: 'element',
-            tagName: 'br',
-            properties: {},
-            children: [],
+            tagName: node.name!,
+            properties: attributeHandler(node.attributes),
+            children: node.children as any[],
         };
 
         return;
@@ -23,11 +35,7 @@ const mdxJsxFlowElementHandler = (node: MdxJsxFlowElement, index: number, parent
     parent.children[index] = node.name ? {
         type: 'component',
         name: node.name,
-        properties: node.attributes.reduce((acc: any, attr: any) => {
-            acc[attr.name] = AttributeHandlers[attr.type as keyof typeof AttributeHandlers](attr);
-
-            return acc;
-        }, {}),
+        properties: attributeHandler(node.attributes),
         children: node.children as any,
     } : {
         type: 'element',

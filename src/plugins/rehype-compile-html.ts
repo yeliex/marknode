@@ -18,13 +18,13 @@ export type HtmlNode = HtmlNodeItem | ComponentNode;
 const treeToHtmlGroup = (tree: any[]) => {
     const group: any[] = [];
 
-    let currentItem: any = null;
+    let currentItem: any = undefined;
 
     tree.forEach((item: any) => {
         if (item.type === 'component') {
-            group.push(currentItem);
+            currentItem && group.push(currentItem);
             group.push(item);
-            currentItem = null;
+            currentItem = undefined;
         } else {
             currentItem = currentItem || [];
             currentItem.push(item);

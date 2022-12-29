@@ -1,9 +1,13 @@
 import { type Parent, type Content } from 'hast';
 
 import mdxJsxFlowElement from './mdxJsxFlowElement.js';
+import mdxJsxTextElement from './mdxJsxTextElement.js';
+import text from './text.js';
 
 const Handlers = {
     mdxJsxFlowElement,
+    mdxJsxTextElement,
+    text,
 };
 
 const handler = (node: Content, index: number | null, parent: Parent) => {

@@ -1,4 +1,6 @@
 import { mdxJsx } from 'micromark-extension-mdx-jsx';
+import { mdxMd } from 'micromark-extension-mdx-md';
+import { combineExtensions } from 'micromark-util-combine-extensions';
 import { mdxFromMarkdown, mdxToMarkdown } from 'mdast-util-mdx';
 import { Parser } from 'acorn';
 import acornJsx from 'acorn-jsx';
@@ -19,14 +21,17 @@ export default function remarkJSX(this: Processor) {
         list.push(value);
     }
 
-    add('micromarkExtensions', mdxJsx({
-        acorn: Parser.extend(acornJsx()),
-        acornOptions: {
-            ecmaVersion: 2020,
-            sourceType: 'module',
-        },
-        addResult: true,
-    }));
+    add('micromarkExtensions', combineExtensions([
+        mdxJsx({
+            acorn: Parser.extend(acornJsx()),
+            acornOptions: {
+                ecmaVersion: 2020,
+                sourceType: 'module',
+            },
+            addResult: true,
+        }),
+        mdxMd,
+    ]));
 
     add('fromMarkdownExtensions', mdxFromMarkdown());
     add('toMarkdownExtensions', mdxToMarkdown());

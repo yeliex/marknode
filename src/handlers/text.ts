@@ -1,6 +1,5 @@
 import type { Text, Parent } from 'hast';
 
-
 const textHandler = (node: Text, index: number, parent: Parent) => {
     const value = String(node.value || '');
 
