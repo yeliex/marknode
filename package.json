@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/yeliex/oh-markdown#readme",
   "devDependencies": {
+    "@mdx-js/react": "^2.2.1",
     "@swc/core": "^1.3.22",
     "@swc/jest": "^0.2.24",
     "@types/jest": "^29.2.4",

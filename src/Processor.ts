@@ -166,7 +166,7 @@ export default class Processor {
             const {
                 sourceMap = false,
                 jsx = 'react',
-                provider,
+                provider = true,
             } = options;
 
             const JSXPreset = JSXPresets[jsx] || {};
