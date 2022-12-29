@@ -1,6 +1,6 @@
 {
   "name": "oh-markdown",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Oh! Markdown~ parse and recompile markdown for render by js, support jsx, dom-tree or html",
   "main": "es/index.js",
   "type": "module",
