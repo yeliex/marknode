@@ -7,7 +7,7 @@ describe('Output JSX', () => {
     const processor = new Processor();
 
     test('should stringify react', async () => {
-        const result = processor.toJsx(
+        const result = await processor.toJsx(
             `# Hello World`,
         );
 
@@ -20,7 +20,7 @@ describe('Output JSX', () => {
     });
 
     test('should not generate toc default', async () => {
-        const result = processor.toJsx(
+        const result = await processor.toJsx(
             `# Hello World`,
         );
 
@@ -28,7 +28,7 @@ describe('Output JSX', () => {
     });
 
     test('should generate toc', async () => {
-        const result = processor.toJsx(
+        const result = await processor.toJsx(
             `# Hello World\n\n## Subtitle`,
             { toc: true },
         );

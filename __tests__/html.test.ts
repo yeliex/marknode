@@ -4,7 +4,7 @@ describe('Output as Html', () => {
     const processor = new Processor();
 
     test('should output html', async () => {
-        const result = processor.toHtml(
+        const result = await processor.toHtml(
             `# Hello World
 
 - 123

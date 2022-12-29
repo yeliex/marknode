@@ -3,7 +3,7 @@ import { Processor } from '../src/index.js';
 describe('Parse', () => {
     test('should parse', async () => {
         const processor = new Processor();
-        const result: any = await processor.parse('# Hello World');
+        const result: any = processor.parse('# Hello World');
 
         expect(result.type).toBe('root');
         expect(result.children.length).toBe(1);
@@ -15,7 +15,7 @@ describe('Parse', () => {
 
     test('should parse front-matter yaml', async () => {
         const processor = new Processor();
-        const result: any = await processor.parse(
+        const result: any = processor.parse(
             `---
 matter: front
 ---
@@ -33,7 +33,7 @@ matter: front
 
     test('should parse front-matter toml', async () => {
         const processor = new Processor();
-        const result: any = await processor.parse(
+        const result: any = processor.parse(
             `+++
 matter: front
 +++

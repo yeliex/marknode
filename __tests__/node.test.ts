@@ -4,7 +4,7 @@ describe('Output as Node', () => {
     const processor = new Processor();
 
     test('should output node', async () => {
-        const result = processor.toNode(
+        const result = await processor.toNode(
             `# Hello World
 
 ## sub
@@ -19,7 +19,7 @@ describe('Output as Node', () => {
     });
 
     test('should support HTML tag', async () => {
-        const result = processor.toNode(
+        const result = await processor.toNode(
             `# Hello World
 
 <test string="string" number={1} array={[1, 'string', {obj: true}]} object={{obj: true}} />
@@ -30,7 +30,7 @@ describe('Output as Node', () => {
     });
 
     test('should support HTML tag with children', async () => {
-        const result = processor.toNode(
+        const result = await processor.toNode(
             `# Hello World
 
 <test>
@@ -43,7 +43,7 @@ children content
     });
 
     test('should support HTML tag with children markdown', async () => {
-        const result = processor.toNode(
+        const result = await processor.toNode(
             `# Hello World
 
 <test>

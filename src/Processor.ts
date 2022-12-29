@@ -204,7 +204,7 @@ export default class Processor {
         return this.processor.parse(content);
     }
 
-    public toNode = (
+    public toNodeSync = (
         file: VFileCompatible,
         options: OutputOptions = {} as any,
     ): TransformResult<ElementContent[]> => {
@@ -219,7 +219,22 @@ export default class Processor {
         };
     };
 
-    public toHtml(file: VFileCompatible, options: HtmlOutputOptions = {} as any): TransformResult<HtmlNode[]> {
+    public toNode = async (
+        file: VFileCompatible,
+        options: OutputOptions = {} as any,
+    ): Promise<TransformResult<ElementContent[]>> => {
+        const processor = this.getProcessor({ type: 'node', ...options });
+
+        const data: any = await processor.process(file);
+
+        return {
+            title: data.title,
+            data: data.result.children,
+            toc: data.toc,
+        };
+    };
+
+    public toHtmlSync(file: VFileCompatible, options: HtmlOutputOptions = {} as any): TransformResult<HtmlNode[]> {
         const processor = this.getProcessor({ type: 'html', ...options });
 
         const data: any = processor.processSync(file);
@@ -231,9 +246,24 @@ export default class Processor {
         };
     }
 
+    public toHtml = async (
+        file: VFileCompatible,
+        options: HtmlOutputOptions = {} as any,
+    ): Promise<TransformResult<HtmlNode[]>> => {
+        const processor = this.getProcessor({ type: 'html', ...options });
+
+        const data: any = await processor.process(file);
+
+        return {
+            title: data.title,
+            data: data.result,
+            toc: data.toc,
+        };
+    };
+
     // todo: implement toComponent for run in app
 
-    public toJsx = (
+    public toJsxSync = (
         file: VFileCompatible,
         options: InnerJsxStringifyOptions & OutputOptions = {},
     ): TransformResult<string> => {
@@ -243,6 +273,25 @@ export default class Processor {
         });
 
         const result: any = processor.processSync(file);
+
+        return {
+            title: result.title,
+            data: result.value,
+            toc: options.toc ? result.toc : undefined,
+            sourceMap: result.map,
+        };
+    };
+
+    public toJsx = async (
+        file: VFileCompatible,
+        options: InnerJsxStringifyOptions & OutputOptions = {},
+    ): Promise<TransformResult<string>> => {
+        const processor = this.getProcessor({
+            ...options,
+            type: 'jsx',
+        });
+
+        const result: any = await processor.process(file);
 
         return {
             title: result.title,
