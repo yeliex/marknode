@@ -11,7 +11,6 @@ import remarkRehype from 'remark-rehype';
 import { nodeTypes } from '@mdx-js/mdx';
 import rehypeRaw from 'rehype-raw';
 import remarkFrontmatter from 'remark-frontmatter';
-import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import rehypeSlug from 'rehype-slug-custom-id';
 import { optionsToString } from './utils.js';
 import { type VFileCompatible } from 'vfile';
@@ -29,6 +28,8 @@ import rehypeCompileNode from './plugins/rehype-compile-node.js';
 import rehypeCompileHtml, { type HtmlNode } from './plugins/rehype-compile-html.js';
 import rehypeTitle from './plugins/rehype-title.js';
 import rehypeRemoveLineBreak from './plugins/rehype-remove-line-break.js';
+import remarkMeta from './plugins/remark-meta.js';
+import jsxMetaOutput from './plugins/jsx-meta-output.js';
 
 export { type HtmlNode };
 
@@ -114,7 +115,7 @@ export default class Processor {
         processor.use(remarkMarkAndUnravel);
 
         processor.use(remarkFrontmatter, ['yaml', 'toml']);
-        processor.use(remarkMdxFrontmatter);
+        processor.use(remarkMeta);
 
         processor.use(remarkRehype, {
             allowDangerousHtml: true,
@@ -170,6 +171,8 @@ export default class Processor {
 
             const JSXPreset = JSXPresets[jsx] || {};
 
+            processor.use(jsxMetaOutput);
+
             processor.use(rehypeRecma);
 
             processor.use(recmaDocument, {
@@ -216,6 +219,7 @@ export default class Processor {
             title: data.title,
             data: data.result.children,
             toc: data.toc,
+            meta: data.meta,
         };
     };
 
@@ -231,6 +235,7 @@ export default class Processor {
             title: data.title,
             data: data.result.children,
             toc: data.toc,
+            meta: data.meta,
         };
     };
 
@@ -243,6 +248,7 @@ export default class Processor {
             title: data.title,
             data: data.result,
             toc: data.toc,
+            meta: data.meta,
         };
     }
 
@@ -258,6 +264,7 @@ export default class Processor {
             title: data.title,
             data: data.result,
             toc: data.toc,
+            meta: data.meta,
         };
     };
 
@@ -279,6 +286,7 @@ export default class Processor {
             data: result.value,
             toc: options.toc ? result.toc : undefined,
             sourceMap: result.map,
+            meta: result.meta,
         };
     };
 
@@ -298,6 +306,7 @@ export default class Processor {
             data: result.value,
             toc: options.toc ? result.toc : undefined,
             sourceMap: result.map,
+            meta: result.meta,
         };
     };
 }

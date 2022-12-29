@@ -8,6 +8,7 @@ exports[`Output as Html should output html 1`] = `
       "type": "html",
     },
   ],
+  "meta": {},
   "title": "Hello World",
   "toc": [
     {

@@ -59,6 +59,7 @@ exports[`Output as Node should output node 1`] = `
       "type": "element",
     },
   ],
+  "meta": {},
   "title": "Hello World",
   "toc": undefined,
 }
@@ -100,6 +101,7 @@ exports[`Output as Node should support HTML tag 1`] = `
       "type": "component",
     },
   ],
+  "meta": {},
   "title": "Hello World",
   "toc": undefined,
 }
@@ -140,6 +142,7 @@ exports[`Output as Node should support HTML tag with children 1`] = `
       "type": "component",
     },
   ],
+  "meta": {},
   "title": "Hello World",
   "toc": undefined,
 }
@@ -187,6 +190,7 @@ exports[`Output as Node should support HTML tag with children markdown 1`] = `
       "type": "component",
     },
   ],
+  "meta": {},
   "title": "Hello World",
   "toc": undefined,
 }
