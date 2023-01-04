@@ -14,6 +14,7 @@ const HTMLTagNames = Object.values(TAG_NAMES);
 
 export const attributeHandler = (attributes: MdxJsxFlowElement['attributes']): Record<string, any> => {
     return attributes.reduce((acc: any, attr: any) => {
+        // todo: if attr is style and in react, transform to object
         acc[attr.name] = AttributeHandlers[attr.type as keyof typeof AttributeHandlers](attr);
 
         return acc;
