@@ -28,12 +28,6 @@
     "strict": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
-    "target": "es2019",
-    "baseUrl": "./",
-    "sourceRoot": "src",
-    "outDir": "es"
-  },
-  "include": [
-    "src"
-  ]
+    "target": "es2019"
+  }
 }

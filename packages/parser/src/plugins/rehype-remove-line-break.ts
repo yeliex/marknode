@@ -3,7 +3,7 @@ import { visit } from 'unist-util-visit';
 
 export default function rehypeRemoveLineBreak() {
     return (tree: any) => {
-        remove(tree, (node) => {
+        remove(tree, (node: any) => {
             return node.type === 'text' &&
                 node.value === '\n';
         });

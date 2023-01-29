@@ -1,4 +1,4 @@
-import { Processor } from '../src/index.js';
+import { Processor } from '../packages/parser/src/index.js';
 
 describe('Output as Node', () => {
     const processor = new Processor();

@@ -1,0 +1,34 @@
+{
+  "name": "@oh-markdown/react",
+  "version": "1.0.5",
+  "description": "Oh! Markdown~ react render",
+  "main": "es/index.js",
+  "type": "module",
+  "typings": "es/index.d.ts",
+  "files": [
+    "es",
+    "src",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "clean": "rm -rf es",
+    "build": "tsc -p tsconfig.json",
+    "test:type": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yeliex/oh-markdown.git"
+  },
+  "author": "yeliex <yeliex@yeliex.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yeliex/oh-markdown/issues"
+  },
+  "homepage": "https://github.com/yeliex/oh-markdown#readme",
+  "dependencies": {
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0"
+  }
+}
