@@ -1,8 +1,8 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compileOnSave": false,
+  "compileOnSave": true,
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-jsx",
     "baseUrl": "./",
     "sourceRoot": "src",
     "outDir": "es"
