@@ -6,7 +6,7 @@ import { type Component } from '../index.js';
 
 export interface HtmlNodeItem {
     type: 'html';
-    value: string;
+    content: string;
 }
 
 export interface ComponentNode extends Omit<Component, 'children'> {

@@ -50,8 +50,7 @@ interface InnerJsxStringifyOptions {
     sourceMap?: boolean;
     // todo: output = 'component'
     jsx?: AvailableJSXOutputType,
-    // todo: support `boolean | string` to customize provider
-    provider?: boolean;
+    provider?: boolean | string;
 }
 
 export interface HtmlOutputOptions extends OutputOptions {
@@ -184,7 +183,8 @@ export default class Processor {
             processor.use(recmaJsxRewrite, {
                 development: this.options.debug,
                 outputFormat: 'program',
-                providerImportSource: !provider ? undefined : JSXPreset.provider,
+                providerImportSource: !provider ? undefined :
+                    (typeof provider === 'string' ? provider : JSXPreset.provider),
             });
 
             if (!JSXPreset.preserve) {
