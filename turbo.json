@@ -5,7 +5,7 @@
             "inputs": ["src/**", "tsconfig.json", "package.json"]
         },
         "build": {
-            "dependsOn": ["^build", "^clean"],
+            "dependsOn": ["^build", "clean"],
             "outputs": ["es/**"],
             "inputs": ["src/**", "tsconfig.json", "package.json"]
         },
@@ -14,7 +14,7 @@
         },
         "//#test:unit": {
             "outputs": ["coverage/**"],
-            "inputs": ["__tests__/**"]
+            "inputs": ["__tests__/**", ".swcrc", "jest.config.mjs"]
         },
         "test:type": {
             "dependsOn": ["^build"]

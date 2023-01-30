@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { Processor } from '../packages/parser/src/index.js';
+import { Processor } from 'oh-markdown';
 import toModule from './helpers/toModule.js';
 
 describe('Output JSX', () => {

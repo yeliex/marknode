@@ -10,6 +10,7 @@ const config = {
     transform: {
         '^.+\\.(t|j)sx?$': ['@swc/jest'],
     },
+    transformIgnorePatterns: [],
     coverageDirectory: '<rootDir>/coverage',
     coverageReporters: [
         'json-summary',
@@ -26,8 +27,8 @@ const config = {
             statements: 100,
         },
     },
-    resolver: 'ts-jest-resolver',
-    extensionsToTreatAsEsm: ['.ts'],
+    resolver: '<rootDir>/__tests__/resolver/resolver.cjs',
+    extensionsToTreatAsEsm: ['.ts', '.tsx', '.jsx']
 };
 
 export default config;

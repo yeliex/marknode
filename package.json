@@ -1,17 +1,16 @@
 {
-  "name": "oh-markdown",
   "private": true,
   "description": "Oh! Markdown~ parse and recompile markdown for render by js, support jsx, dom-tree or html",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "clean": "turbo run clean",
-    "build": "turbo run build",
-    "test:unit": "node --experimental-vm-modules node_modules/.bin/jest",
-    "test": "turbo run test",
+    "clean": "turbo run clean --no-daemon",
+    "build": "turbo run build --no-daemon",
+    "test:unit": "node --no-warnings --experimental-vm-modules node_modules/.bin/jest",
+    "test": "turbo run test --no-daemon",
     "prepare": "husky install",
-    "release": "turbo run release && changeset version && changeset publish"
+    "release": "turbo run release --no-daemon --output-logs=new-only && changeset version && changeset publish"
   },
   "license": "MIT",
   "bugs": {
@@ -37,7 +36,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test"
+      "pre-commit": "npm test -- --output-logs=new-only"
     }
   }
 }

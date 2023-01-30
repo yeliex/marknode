@@ -1,4 +1,4 @@
-import { Processor } from '../packages/parser/src/index.js';
+import { Processor } from 'oh-markdown';
 
 describe('Output as Html', () => {
     const processor = new Processor();
