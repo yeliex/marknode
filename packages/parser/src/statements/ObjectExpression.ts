@@ -1,4 +1,4 @@
-import { ObjectExpression } from 'estree';
+import type { ObjectExpression } from 'estree';
 import * as AllowedStatements from '../statements/index.js';
 import { VFileMessage } from 'vfile-message';
 
