@@ -1,5 +1,11 @@
 # oh-markdown
 
+## 1.1.2
+
+### Patch Changes
+
+- 0f6f9f2: fix: remove process
+
 ## 1.1.1
 
 ### Patch Changes
