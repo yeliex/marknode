@@ -22,7 +22,6 @@ import { recmaDocument } from '@mdx-js/mdx/lib/plugin/recma-document.js';
 import { recmaJsxRewrite } from '@mdx-js/mdx/lib/plugin/recma-jsx-rewrite.js';
 import { recmaJsxBuild } from '@mdx-js/mdx/lib/plugin/recma-jsx-build.js';
 import { recmaStringify } from '@mdx-js/mdx/lib/plugin/recma-stringify.js';
-import * as process from 'process';
 import { CACHE_KEY_DEFAULT } from './consts.js';
 import rehypeCompileNode from './plugins/rehype-compile-node.js';
 import rehypeCompileHtml, { type HtmlNode } from './plugins/rehype-compile-html.js';
@@ -97,7 +96,7 @@ export default class Processor {
     private readonly options: ProcessorOptions;
 
     constructor(options: Partial<ProcessorOptions> = {}) {
-        const { debug = process.env.NODE_ENV === 'development' } = options;
+        const { debug = false } = options;
 
         this.options = { debug };
 
