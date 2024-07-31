@@ -1,5 +1,11 @@
 # oh-markdown
 
+## 1.1.3
+
+### Patch Changes
+
+- 7f8ed21: chore: update deps
+
 ## 1.1.2
 
 ### Patch Changes

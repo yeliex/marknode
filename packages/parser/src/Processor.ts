@@ -11,7 +11,6 @@ import remarkRehype from 'remark-rehype';
 import { nodeTypes } from '@mdx-js/mdx';
 import rehypeRaw from 'rehype-raw';
 import remarkFrontmatter from 'remark-frontmatter';
-import rehypeSlug from 'rehype-slug-custom-id';
 import { optionsToString } from './utils.js';
 import { type VFileCompatible } from 'vfile';
 import { SourceMapGenerator } from 'source-map';
@@ -28,6 +27,7 @@ import rehypeCompileHtml, { type HtmlNode } from './plugins/rehype-compile-html.
 import rehypeTitle from './plugins/rehype-title.js';
 import rehypeRemoveLineBreak from './plugins/rehype-remove-line-break.js';
 import remarkMeta from './plugins/remark-meta.js';
+import rehypeCustomProperties from './plugins/rehype-custom-properties.js';
 import jsxMetaOutput from './plugins/jsx-meta-output.js';
 
 export { type HtmlNode };
@@ -124,8 +124,6 @@ export default class Processor {
             passThrough: [...nodeTypes],
         });
 
-        processor.use(rehypeSlug, { enableCustomId: true });
-
         processor.freeze();
 
         this.PROCESSORS.set(CACHE_KEY_DEFAULT, processor);
@@ -146,15 +144,17 @@ export default class Processor {
 
         const { toc = false, removeTitle = false } = options;
 
-        if (toc) {
-            processor.use(rehypeToc);
-        }
-
         processor.use(rehypeTitle, {
             removeTitle,
         });
 
         processor.use(rehypeRemoveLineBreak);
+
+        processor.use(rehypeCustomProperties);
+
+        if (toc) {
+            processor.use(rehypeToc);
+        }
 
         if (options.type === 'node') {
             processor.use(rehypeCompileNode);

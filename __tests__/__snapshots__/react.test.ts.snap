@@ -2,4 +2,8 @@
 
 exports[`Render Html Result should render 1`] = `"<script></script><h1 id="hello-world">Hello World</h1><h2 id="sub">sub</h2><ul><li>1</li><li>2</li></ul><script></script>"`;
 
+exports[`Render Html Result should render custom properties 1`] = `"<script></script><h1 style="text-align: center" id="hello">Hello World</h1><h2 style="font-weight: 600; color: #777777" id="list">list</h2><ul style="color: red"><li style="color: blue">1</li><li>2</li></ul><p style="text-align: center">center-test</p><p><span style="color: red; font-weight: 600">important</span><br>multi-line</p><script></script>"`;
+
 exports[`Render Node Result should render 1`] = `"<h1 id="hello-world">Hello World</h1><h2 id="sub">sub</h2><ul><li>1</li><li>2</li></ul>"`;
+
+exports[`Render Node Result should render custom properties 1`] = `"<h1 style="text-align:center" id="hello">Hello World</h1><h2 style="font-weight:600;color:#777777" id="list">list</h2><ul style="color:red"><li style="color:blue">1</li><li>2</li></ul><p style="text-align:center">center-test</p><p><span style="color:red;font-weight:600">important</span><br/>multi-line</p>"`;

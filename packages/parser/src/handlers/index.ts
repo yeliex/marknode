@@ -1,4 +1,4 @@
-import { type Parent, type Content } from 'hast';
+import { type Content, type Parent } from 'hast';
 
 import mdxJsxFlowElement from './mdxJsxFlowElement.js';
 import mdxJsxTextElement from './mdxJsxTextElement.js';

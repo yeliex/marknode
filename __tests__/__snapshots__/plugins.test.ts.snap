@@ -1,0 +1,459 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Parse Custom Properties should convert custom properties to html 1`] = `
+{
+  "data": [
+    {
+      "content": "<h1 style="text-align: center" id="hello">Hello World</h1><h2 style="font-weight: 600; color: #777777" id="list">list</h2><ul style="color: red"><li style="color: blue">1</li><li>2</li></ul><p style="text-align: center">center-test</p><p><span style="color: red; font-weight: 600">important</span><br>multi-line</p>",
+      "type": "html",
+    },
+  ],
+  "meta": {},
+  "title": "Hello World {#hello,center}",
+  "toc": undefined,
+}
+`;
+
+exports[`Parse Custom Properties should convert custom properties to node 1`] = `
+{
+  "data": [
+    {
+      "children": [
+        {
+          "type": "text",
+          "value": "Hello World",
+        },
+      ],
+      "properties": {
+        "id": "hello",
+        "style": {
+          "textAlign": "center",
+        },
+      },
+      "tagName": "h1",
+      "type": "element",
+    },
+    {
+      "children": [
+        {
+          "type": "text",
+          "value": "list",
+        },
+      ],
+      "properties": {
+        "id": "list",
+        "style": {
+          "color": "#777777",
+          "fontWeight": "600",
+        },
+      },
+      "tagName": "h2",
+      "type": "element",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "type": "text",
+              "value": "1",
+            },
+          ],
+          "properties": {
+            "id": undefined,
+            "style": {
+              "color": "blue",
+            },
+          },
+          "tagName": "li",
+          "type": "element",
+        },
+        {
+          "children": [
+            {
+              "type": "text",
+              "value": "2",
+            },
+          ],
+          "properties": {},
+          "tagName": "li",
+          "type": "element",
+        },
+      ],
+      "properties": {
+        "id": undefined,
+        "style": {
+          "color": "red",
+        },
+      },
+      "tagName": "ul",
+      "type": "element",
+    },
+    {
+      "children": [
+        {
+          "type": "text",
+          "value": "center-test",
+        },
+      ],
+      "properties": {
+        "id": undefined,
+        "style": {
+          "textAlign": "center",
+        },
+      },
+      "tagName": "p",
+      "type": "element",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "type": "text",
+              "value": "important",
+            },
+          ],
+          "properties": {
+            "id": undefined,
+            "style": {
+              "color": "red",
+              "fontWeight": "600",
+            },
+          },
+          "tagName": "span",
+          "type": "element",
+        },
+        {
+          "children": [],
+          "properties": {},
+          "tagName": "br",
+          "type": "element",
+        },
+        {
+          "type": "text",
+          "value": "multi-line",
+        },
+      ],
+      "properties": {},
+      "tagName": "p",
+      "type": "element",
+    },
+  ],
+  "meta": {},
+  "title": "Hello World {#hello,center}",
+  "toc": undefined,
+}
+`;
+
+exports[`Parse Custom Properties should parse custom properties 1`] = `
+{
+  "children": [
+    {
+      "children": [
+        {
+          "position": {
+            "end": {
+              "column": 30,
+              "line": 1,
+              "offset": 29,
+            },
+            "start": {
+              "column": 3,
+              "line": 1,
+              "offset": 2,
+            },
+          },
+          "type": "text",
+          "value": "Hello World {#hello,center}",
+        },
+      ],
+      "depth": 1,
+      "position": {
+        "end": {
+          "column": 30,
+          "line": 1,
+          "offset": 29,
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "type": "heading",
+    },
+    {
+      "children": [
+        {
+          "position": {
+            "end": {
+              "column": 38,
+              "line": 3,
+              "offset": 68,
+            },
+            "start": {
+              "column": 4,
+              "line": 3,
+              "offset": 34,
+            },
+          },
+          "type": "text",
+          "value": "list {font-semibold,color=#777777}",
+        },
+      ],
+      "depth": 2,
+      "position": {
+        "end": {
+          "column": 38,
+          "line": 3,
+          "offset": 68,
+        },
+        "start": {
+          "column": 1,
+          "line": 3,
+          "offset": 31,
+        },
+      },
+      "type": "heading",
+    },
+    {
+      "children": [
+        {
+          "position": {
+            "end": {
+              "column": 13,
+              "line": 5,
+              "offset": 82,
+            },
+            "start": {
+              "column": 1,
+              "line": 5,
+              "offset": 70,
+            },
+          },
+          "type": "text",
+          "value": "{>color=red}",
+        },
+      ],
+      "position": {
+        "end": {
+          "column": 13,
+          "line": 5,
+          "offset": 82,
+        },
+        "start": {
+          "column": 1,
+          "line": 5,
+          "offset": 70,
+        },
+      },
+      "type": "paragraph",
+    },
+    {
+      "children": [
+        {
+          "checked": null,
+          "children": [
+            {
+              "children": [
+                {
+                  "position": {
+                    "end": {
+                      "column": 17,
+                      "line": 6,
+                      "offset": 99,
+                    },
+                    "start": {
+                      "column": 3,
+                      "line": 6,
+                      "offset": 85,
+                    },
+                  },
+                  "type": "text",
+                  "value": "1 {color=blue}",
+                },
+              ],
+              "position": {
+                "end": {
+                  "column": 17,
+                  "line": 6,
+                  "offset": 99,
+                },
+                "start": {
+                  "column": 3,
+                  "line": 6,
+                  "offset": 85,
+                },
+              },
+              "type": "paragraph",
+            },
+          ],
+          "position": {
+            "end": {
+              "column": 17,
+              "line": 6,
+              "offset": 99,
+            },
+            "start": {
+              "column": 1,
+              "line": 6,
+              "offset": 83,
+            },
+          },
+          "spread": false,
+          "type": "listItem",
+        },
+        {
+          "checked": null,
+          "children": [
+            {
+              "children": [
+                {
+                  "position": {
+                    "end": {
+                      "column": 4,
+                      "line": 7,
+                      "offset": 103,
+                    },
+                    "start": {
+                      "column": 3,
+                      "line": 7,
+                      "offset": 102,
+                    },
+                  },
+                  "type": "text",
+                  "value": "2",
+                },
+              ],
+              "position": {
+                "end": {
+                  "column": 4,
+                  "line": 7,
+                  "offset": 103,
+                },
+                "start": {
+                  "column": 3,
+                  "line": 7,
+                  "offset": 102,
+                },
+              },
+              "type": "paragraph",
+            },
+          ],
+          "position": {
+            "end": {
+              "column": 4,
+              "line": 7,
+              "offset": 103,
+            },
+            "start": {
+              "column": 1,
+              "line": 7,
+              "offset": 100,
+            },
+          },
+          "spread": false,
+          "type": "listItem",
+        },
+      ],
+      "ordered": false,
+      "position": {
+        "end": {
+          "column": 4,
+          "line": 7,
+          "offset": 103,
+        },
+        "start": {
+          "column": 1,
+          "line": 6,
+          "offset": 83,
+        },
+      },
+      "spread": false,
+      "start": null,
+      "type": "list",
+    },
+    {
+      "children": [
+        {
+          "position": {
+            "end": {
+              "column": 21,
+              "line": 9,
+              "offset": 125,
+            },
+            "start": {
+              "column": 1,
+              "line": 9,
+              "offset": 105,
+            },
+          },
+          "type": "text",
+          "value": "center-test {center}",
+        },
+      ],
+      "position": {
+        "end": {
+          "column": 21,
+          "line": 9,
+          "offset": 125,
+        },
+        "start": {
+          "column": 1,
+          "line": 9,
+          "offset": 105,
+        },
+      },
+      "type": "paragraph",
+    },
+    {
+      "children": [
+        {
+          "position": {
+            "end": {
+              "column": 11,
+              "line": 12,
+              "offset": 173,
+            },
+            "start": {
+              "column": 1,
+              "line": 11,
+              "offset": 127,
+            },
+          },
+          "type": "text",
+          "value": "important {color=red,font-semibold}
+multi-line",
+        },
+      ],
+      "position": {
+        "end": {
+          "column": 11,
+          "line": 12,
+          "offset": 173,
+        },
+        "start": {
+          "column": 1,
+          "line": 11,
+          "offset": 127,
+        },
+      },
+      "type": "paragraph",
+    },
+  ],
+  "position": {
+    "end": {
+      "column": 9,
+      "line": 13,
+      "offset": 182,
+    },
+    "start": {
+      "column": 1,
+      "line": 1,
+      "offset": 0,
+    },
+  },
+  "type": "root",
+}
+`;

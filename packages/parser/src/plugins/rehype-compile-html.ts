@@ -1,7 +1,7 @@
+import { toHtml } from 'hast-util-to-html';
 import { Processor } from 'unified';
 import { visit } from 'unist-util-visit';
-import { toHtml } from 'hast-util-to-html';
-import handler from '../handlers/index.js';
+import handlers from '../handlers/index.js';
 import { type Component } from '../index.js';
 
 export interface HtmlNodeItem {
@@ -56,7 +56,15 @@ function rehypeCompileHtml(this: Processor) {
     };
 
     function compiler(tree: any) {
-        visit(tree, handler);
+        visit(tree, (node, ...args) => {
+            if ('properties' in node && typeof node.properties?.style === 'object') {
+                node.properties.style = Object.entries(node.properties.style as any)
+                    .map(([key, value]) => `${key}: ${value}`)
+                    .join('; ');
+            }
+
+            handlers(node, ...args);
+        });
 
         return walkThroughNodes(tree.children);
     }
