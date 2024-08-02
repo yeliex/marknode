@@ -3,6 +3,7 @@ import { Element, ElementContent, Node, Parent, Text } from 'hast';
 import { headingRank } from 'hast-util-heading-rank';
 import set from 'lodash.set';
 import { toString } from 'mdast-util-to-string';
+import type { CSSProperties } from 'react';
 import { remove } from 'unist-util-remove';
 import { SKIP, visit } from 'unist-util-visit';
 import { VisitorResult } from 'unist-util-visit-parents/complex-types.js';
@@ -12,7 +13,7 @@ export const slugs = new Slugger();
 const styleProperties: Array<
     string |
     [string, string] |
-    [string, [string, string]]
+    [string, CSSProperties]
 > = [
     'width',
     'height',
@@ -26,12 +27,12 @@ const styleProperties: Array<
     // align
     'text-align',
     ['align', 'text-align'],
-    ['center', ['text-align', 'center']],
-    ['align-center', ['text-align', 'center']],
-    ['align-left', ['text-align', 'left']],
+    ['center', { textAlign: 'center' }],
+    ['align-center', { textAlign: 'center' }],
+    ['align-left', { textAlign: 'left' }],
     'float',
-    ['float-left', ['float', 'left']],
-    ['float-right', ['float', 'right']],
+    ['float-left', { float: 'left' }],
+    ['float-right', { float: 'right' }],
 
     // text
     'color',
@@ -40,19 +41,19 @@ const styleProperties: Array<
     'font',
     'font-family',
     'font-style',
-    ['italic', ['font-style', 'italic']],
-    ['oblique', ['font-style', 'oblique']],
+    ['italic', { fontStyle: 'italic' }],
+    ['oblique', { fontStyle: 'oblique' }],
     'font-weight',
     ['weight', 'font-weight'],
-    ['font-thin', ['font-weight', '100']],
-    ['font-extralight', ['font-weight', '200']],
-    ['font-lighter', ['font-weight', '300']],
-    ['font-normal', ['font-weight', '400']],
-    ['font-medium', ['font-weight', '500']],
-    ['font-semibold', ['font-weight', '600']],
-    ['font-bold', ['font-weight', '700']],
-    ['font-extrabold', ['font-weight', '800']],
-    ['font-black', ['font-weight', '900']],
+    ['font-thin', { fontWeight: '100' }],
+    ['font-extralight', { fontWeight: '200' }],
+    ['font-lighter', { fontWeight: '300' }],
+    ['font-normal', { fontWeight: '400' }],
+    ['font-medium', { fontWeight: '500' }],
+    ['font-semibold', { fontWeight: '600' }],
+    ['font-bold', { fontWeight: '700' }],
+    ['font-extrabold', { fontWeight: '800' }],
+    ['font-black', { fontWeight: '900' }],
     'letter-spacing',
     ['tracking', 'letter-spacing'],
     'line-break',
@@ -60,8 +61,8 @@ const styleProperties: Array<
     ['leading', 'line-height'],
     'text-decoration',
     ['decoration', 'text-decoration'],
-    ['underline', ['text-decoration', 'underline']],
-    ['line-through', ['text-decoration', 'line-through']],
+    ['underline', { textDecoration: 'underline' }],
+    ['line-through', { textDecoration: 'line-through' }],
     'text-indent',
     ['indent', 'text-indent'],
     'white-space',
@@ -76,7 +77,7 @@ const styleProperties: Array<
 
         return total;
     }, []),
-
+    ['mx-auto', { marginLeft: 'auto', marginRight: 'auto' }],
 
     // background
     'background',
@@ -92,19 +93,19 @@ const styleProperties: Array<
     }, []),
 
     // display
-    ['hidden', ['display', 'none']],
+    ['hidden', { display: 'none' }],
 
     // others
     'cursor',
     'direction',
-    ['ltr', ['direction', 'ltr']],
-    ['rtl', ['direction', 'rtl']],
+    ['ltr', { direction: 'ltr' }],
+    ['rtl', { direction: 'rtl' }],
     'user-select',
-    ['selectable', ['user-select', 'auto']],
-    ['unselectable', ['user-select', 'none']],
+    ['selectable', { userSelect: 'auto' }],
+    ['unselectable', { userSelect: 'none' }],
 ];
 
-const StyleProperties = new Map<string, string | [string, string]>(styleProperties.map((item) => {
+const StyleProperties = new Map<string, string | CSSProperties>(styleProperties.map((item) => {
     if (typeof item === 'string') {
         return [item, item];
     }
@@ -185,7 +186,7 @@ export default function rehypeCustomProperties(props: IProps = {}) {
                         parent.children.splice(index, 0, sibling);
                     }
 
-                    appendProperiesToNode(sibling, properties);
+                    appendPropertiesToNode(sibling, properties);
 
                     return [SKIP, index];
                 }
@@ -204,6 +205,7 @@ export default function rehypeCustomProperties(props: IProps = {}) {
 
             for (let i = 0; i < node.children.length; i++) {
                 const child = node.children[i];
+                const isLastChild = i === node.children.length - 1;
 
                 if (child.type === 'text') {
                     const match = EXTRACT_PROPERTY_REGEX.exec(toString(child));
@@ -211,16 +213,22 @@ export default function rehypeCustomProperties(props: IProps = {}) {
                     if (match) {
                         child.value = match[1];
 
-                        const el = {
-                            type: 'element',
-                            tagName: 'span',
-                            properties: {},
-                            children: [child as ElementContent],
-                        } as Element;
+                        const props = parseProperty(match[2]);
 
-                        appendProperiesToNode(el, parseProperty(match[2]));
+                        if (isLastChild) {
+                            appendPropertiesToNode(node, props);
+                        } else {
+                            const el = {
+                                type: 'element',
+                                tagName: 'span',
+                                properties: {},
+                                children: [child as ElementContent],
+                            } as Element;
 
-                        node.children[i] = el;
+                            appendPropertiesToNode(el, props);
+
+                            node.children[i] = el;
+                        }
                     }
                 }
             }
@@ -241,7 +249,7 @@ function handleSimple(node: Element) {
 
     last.value = match[1];
 
-    appendProperiesToNode(node, parseProperty(match[2]));
+    appendPropertiesToNode(node, parseProperty(match[2]));
 }
 
 type Properties = {
@@ -261,24 +269,27 @@ function parseProperty(test: string): Properties {
         const styleConfig = StyleProperties.get(key);
 
         if (!styleConfig) {
-            set(total, key, value || 'true');
+            set(total, key, value ? value.replaceAll('_', ' ') : 'true');
 
             return total;
         }
 
-        if (Array.isArray(styleConfig)) {
-            set(total, ['style', styleConfig[0]], styleConfig[1]);
+        if (typeof styleConfig === 'string') {
+            set(total, ['style', styleConfig], value ? value.replaceAll('_', ' ') : 'true');
 
             return total;
-        } else if (value) {
-            set(total, ['style', styleConfig], value);
+        } else {
+            total.style = {
+                ...(total.style || {}),
+                ...styleConfig as Record<string, string>,
+            };
         }
 
         return total;
     }, {});
 }
 
-function appendProperiesToNode(node: Element, { id, style, ...props }: Properties) {
+function appendPropertiesToNode(node: Element, { id, style, ...props }: Properties) {
     node.properties = {
         ...(node.properties || {}),
         ...props,
@@ -286,6 +297,7 @@ function appendProperiesToNode(node: Element, { id, style, ...props }: Propertie
             ...(node.properties?.style as any || {}),
             ...style,
         } : node.properties?.style,
-        id: node.properties?.id || id,
     };
+
+    id && !node.properties.id && (node.properties.id = id);
 }

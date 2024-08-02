@@ -3,6 +3,7 @@ import { Processor } from 'unified';
 import { visit } from 'unist-util-visit';
 import handlers from '../handlers/index.js';
 import { type Component } from '../index.js';
+import kebabcase from 'lodash.kebabcase';
 
 export interface HtmlNodeItem {
     type: 'html';
@@ -59,7 +60,7 @@ function rehypeCompileHtml(this: Processor) {
         visit(tree, (node, ...args) => {
             if ('properties' in node && typeof node.properties?.style === 'object') {
                 node.properties.style = Object.entries(node.properties.style as any)
-                    .map(([key, value]) => `${key}: ${value}`)
+                    .map(([key, value]) => `${kebabcase(key)}: ${value}`)
                     .join('; ');
             }
 

@@ -37,6 +37,7 @@
     "hast-util-to-html": "^8.0.4",
     "lodash.set": "^4.3.2",
     "lodash.camelcase": "^4.3.0",
+    "lodash.kebabcase": "^4.1.1",
     "mdast-util-mdx": "^2.0.0",
     "mdast-util-to-string": "^3.1.0",
     "micromark-extension-mdx-jsx": "^1.0.3",

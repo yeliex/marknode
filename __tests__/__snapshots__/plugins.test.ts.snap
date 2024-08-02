@@ -4,7 +4,7 @@ exports[`Parse Custom Properties should convert custom properties to html 1`] = 
 {
   "data": [
     {
-      "content": "<h1 style="text-align: center" id="hello">Hello World</h1><h2 style="font-weight: 600; color: #777777" id="list">list</h2><ul style="color: red"><li style="color: blue">1</li><li>2</li></ul><p style="text-align: center">center-test</p><p><span style="color: red; font-weight: 600">important</span><br>multi-line</p>",
+      "content": "<h1 style="text-align: center" id="hello">Hello World</h1><h2 style="font-weight: 600; color: #777777" id="list">list</h2><ul style="color: red"><li style="color: blue">1</li><li>2</li></ul><p style="text-align: center">center-test</p><p><span style="color: red; font-weight: 600">important</span><br>multi-line</p><p style="color: red"><a href="https://www.github.com">link</a></p><p style="width: 100px; text-align: center"><img src="https://github.githubassets.com/assets/mona-loading-default-c3c7aad1282f.gif" alt="image"></p>",
       "type": "html",
     },
   ],
@@ -60,7 +60,6 @@ exports[`Parse Custom Properties should convert custom properties to node 1`] = 
             },
           ],
           "properties": {
-            "id": undefined,
             "style": {
               "color": "blue",
             },
@@ -81,7 +80,6 @@ exports[`Parse Custom Properties should convert custom properties to node 1`] = 
         },
       ],
       "properties": {
-        "id": undefined,
         "style": {
           "color": "red",
         },
@@ -97,7 +95,6 @@ exports[`Parse Custom Properties should convert custom properties to node 1`] = 
         },
       ],
       "properties": {
-        "id": undefined,
         "style": {
           "textAlign": "center",
         },
@@ -115,7 +112,6 @@ exports[`Parse Custom Properties should convert custom properties to node 1`] = 
             },
           ],
           "properties": {
-            "id": undefined,
             "style": {
               "color": "red",
               "fontWeight": "600",
@@ -136,6 +132,51 @@ exports[`Parse Custom Properties should convert custom properties to node 1`] = 
         },
       ],
       "properties": {},
+      "tagName": "p",
+      "type": "element",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "type": "text",
+              "value": "link",
+            },
+          ],
+          "properties": {
+            "href": "https://www.github.com",
+          },
+          "tagName": "a",
+          "type": "element",
+        },
+      ],
+      "properties": {
+        "style": {
+          "color": "red",
+        },
+      },
+      "tagName": "p",
+      "type": "element",
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "properties": {
+            "alt": "image",
+            "src": "https://github.githubassets.com/assets/mona-loading-default-c3c7aad1282f.gif",
+          },
+          "tagName": "img",
+          "type": "element",
+        },
+      ],
+      "properties": {
+        "style": {
+          "textAlign": "center",
+          "width": "100px",
+        },
+      },
       "tagName": "p",
       "type": "element",
     },
@@ -441,12 +482,131 @@ multi-line",
       },
       "type": "paragraph",
     },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "position": {
+                "end": {
+                  "column": 6,
+                  "line": 14,
+                  "offset": 180,
+                },
+                "start": {
+                  "column": 2,
+                  "line": 14,
+                  "offset": 176,
+                },
+              },
+              "type": "text",
+              "value": "link",
+            },
+          ],
+          "position": {
+            "end": {
+              "column": 31,
+              "line": 14,
+              "offset": 205,
+            },
+            "start": {
+              "column": 1,
+              "line": 14,
+              "offset": 175,
+            },
+          },
+          "title": null,
+          "type": "link",
+          "url": "https://www.github.com",
+        },
+        {
+          "position": {
+            "end": {
+              "column": 43,
+              "line": 14,
+              "offset": 217,
+            },
+            "start": {
+              "column": 31,
+              "line": 14,
+              "offset": 205,
+            },
+          },
+          "type": "text",
+          "value": " {color=red}",
+        },
+      ],
+      "position": {
+        "end": {
+          "column": 43,
+          "line": 14,
+          "offset": 217,
+        },
+        "start": {
+          "column": 1,
+          "line": 14,
+          "offset": 175,
+        },
+      },
+      "type": "paragraph",
+    },
+    {
+      "children": [
+        {
+          "alt": "image",
+          "position": {
+            "end": {
+              "column": 87,
+              "line": 16,
+              "offset": 305,
+            },
+            "start": {
+              "column": 1,
+              "line": 16,
+              "offset": 219,
+            },
+          },
+          "title": null,
+          "type": "image",
+          "url": "https://github.githubassets.com/assets/mona-loading-default-c3c7aad1282f.gif",
+        },
+        {
+          "position": {
+            "end": {
+              "column": 108,
+              "line": 16,
+              "offset": 326,
+            },
+            "start": {
+              "column": 87,
+              "line": 16,
+              "offset": 305,
+            },
+          },
+          "type": "text",
+          "value": " {width=100px,center}",
+        },
+      ],
+      "position": {
+        "end": {
+          "column": 108,
+          "line": 16,
+          "offset": 326,
+        },
+        "start": {
+          "column": 1,
+          "line": 16,
+          "offset": 219,
+        },
+      },
+      "type": "paragraph",
+    },
   ],
   "position": {
     "end": {
       "column": 9,
-      "line": 13,
-      "offset": 182,
+      "line": 17,
+      "offset": 335,
     },
     "start": {
       "column": 1,

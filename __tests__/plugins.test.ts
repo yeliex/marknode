@@ -12,7 +12,12 @@ center-test {center}
 
 important {color=red,font-semibold}
 multi-line
+
+[link](https://www.github.com) {color=red}
+
+![image](https://github.githubassets.com/assets/mona-loading-default-c3c7aad1282f.gif) {width=100px,center}
         `;
+
 
 describe('Parse Custom Properties', () => {
     test('should parse custom properties', async () => {
