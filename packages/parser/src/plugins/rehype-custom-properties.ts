@@ -164,7 +164,10 @@ export default function rehypeCustomProperties(props: IProps = {}) {
 
                     let sibling = parent.children[index + 1];
 
-                    while (sibling && sibling.type === 'text' && sibling.value === '\n') {
+                    while (sibling && (
+                        (sibling.type === 'text' && sibling.value === '\n')
+                        || (sibling.type === 'element' && sibling.tagName === 'br')
+                    )) {
                         remove(parent, (node) => node === sibling);
                         sibling = parent.children[index + 1];
                     }
@@ -205,9 +208,38 @@ export default function rehypeCustomProperties(props: IProps = {}) {
 
             for (let i = 0; i < node.children.length; i++) {
                 const child = node.children[i];
-                const isLastChild = i === node.children.length - 1;
 
                 if (child.type === 'text') {
+
+                    /**
+                     * start of paragraph, for next block
+                     * {>color=red}
+                     * xxx
+                     */
+                    if (i === 0) {
+                        const match = EXTRACT_NEXT_PROPERTY_REGEX.exec(child.value);
+
+                        if (match) {
+                            const props = parseProperty(match[1]);
+
+                            let sibling = node.children[i + 1];
+
+                            while (sibling && (
+                                (sibling.type === 'text' && sibling.value === '\n')
+                                || (sibling.type === 'element' && sibling.tagName === 'br')
+                            )) {
+                                remove(node, (n) => n === sibling);
+                                sibling = node.children[i + 1];
+                            }
+
+                            remove(node, (n) => n === child);
+
+                            appendPropertiesToNode(node, props);
+
+                            return;
+                        }
+                    }
+
                     const match = EXTRACT_PROPERTY_REGEX.exec(toString(child));
 
                     if (match) {
@@ -215,20 +247,27 @@ export default function rehypeCustomProperties(props: IProps = {}) {
 
                         const props = parseProperty(match[2]);
 
-                        if (isLastChild) {
+                        /**
+                         * end of paragraph
+                         *
+                         * (link)(https://github.com) {color=red}
+                         */
+                        if (i === node.children.length - 1) {
                             appendPropertiesToNode(node, props);
-                        } else {
-                            const el = {
-                                type: 'element',
-                                tagName: 'span',
-                                properties: {},
-                                children: [child as ElementContent],
-                            } as Element;
 
-                            appendPropertiesToNode(el, props);
-
-                            node.children[i] = el;
+                            return;
                         }
+
+                        const el = {
+                            type: 'element',
+                            tagName: 'span',
+                            properties: {},
+                            children: [child as ElementContent],
+                        } as Element;
+
+                        appendPropertiesToNode(el, props);
+
+                        node.children[i] = el;
                     }
                 }
             }

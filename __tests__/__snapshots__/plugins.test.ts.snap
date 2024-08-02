@@ -4,7 +4,7 @@ exports[`Parse Custom Properties should convert custom properties to html 1`] = 
 {
   "data": [
     {
-      "content": "<h1 style="text-align: center" id="hello">Hello World</h1><h2 style="font-weight: 600; color: #777777" id="list">list</h2><ul style="color: red"><li style="color: blue">1</li><li>2</li></ul><p style="text-align: center">center-test</p><p><span style="color: red; font-weight: 600">important</span><br>multi-line</p><p style="color: red"><a href="https://www.github.com">link</a></p><p style="width: 100px; text-align: center"><img src="https://github.githubassets.com/assets/mona-loading-default-c3c7aad1282f.gif" alt="image"></p>",
+      "content": "<h1 style="text-align: center" id="hello">Hello World</h1><h2 style="font-weight: 600; color: #777777" id="list">list</h2><ul style="color: red"><li style="color: blue">1</li><li>2</li></ul><p style="text-align: center">center-test</p><p><span style="color: red; font-weight: 600">important</span><br>multi-line</p><p style="color: red"><a href="https://www.github.com">link</a></p><p style="width: 100px; text-align: center"><img src="https://github.githubassets.com/assets/mona-loading-default-c3c7aad1282f.gif" alt="image"></p><p style="color: green"><a href="https://www.github.com">link</a></p><p style="max-width: 100px"><img src="https://github.githubassets.com/assets/mona-loading-default-c3c7aad1282f.gif" alt="image"></p>",
       "type": "html",
     },
   ],
@@ -175,6 +175,50 @@ exports[`Parse Custom Properties should convert custom properties to node 1`] = 
         "style": {
           "textAlign": "center",
           "width": "100px",
+        },
+      },
+      "tagName": "p",
+      "type": "element",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "type": "text",
+              "value": "link",
+            },
+          ],
+          "properties": {
+            "href": "https://www.github.com",
+          },
+          "tagName": "a",
+          "type": "element",
+        },
+      ],
+      "properties": {
+        "style": {
+          "color": "green",
+        },
+      },
+      "tagName": "p",
+      "type": "element",
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "properties": {
+            "alt": "image",
+            "src": "https://github.githubassets.com/assets/mona-loading-default-c3c7aad1282f.gif",
+          },
+          "tagName": "img",
+          "type": "element",
+        },
+      ],
+      "properties": {
+        "style": {
+          "maxWidth": "100px",
         },
       },
       "tagName": "p",
@@ -601,12 +645,133 @@ multi-line",
       },
       "type": "paragraph",
     },
+    {
+      "children": [
+        {
+          "position": {
+            "end": {
+              "column": 1,
+              "line": 19,
+              "offset": 343,
+            },
+            "start": {
+              "column": 1,
+              "line": 18,
+              "offset": 328,
+            },
+          },
+          "type": "text",
+          "value": "{>color=green}
+",
+        },
+        {
+          "children": [
+            {
+              "position": {
+                "end": {
+                  "column": 6,
+                  "line": 19,
+                  "offset": 348,
+                },
+                "start": {
+                  "column": 2,
+                  "line": 19,
+                  "offset": 344,
+                },
+              },
+              "type": "text",
+              "value": "link",
+            },
+          ],
+          "position": {
+            "end": {
+              "column": 31,
+              "line": 19,
+              "offset": 373,
+            },
+            "start": {
+              "column": 1,
+              "line": 19,
+              "offset": 343,
+            },
+          },
+          "title": null,
+          "type": "link",
+          "url": "https://www.github.com",
+        },
+      ],
+      "position": {
+        "end": {
+          "column": 31,
+          "line": 19,
+          "offset": 373,
+        },
+        "start": {
+          "column": 1,
+          "line": 18,
+          "offset": 328,
+        },
+      },
+      "type": "paragraph",
+    },
+    {
+      "children": [
+        {
+          "position": {
+            "end": {
+              "column": 1,
+              "line": 22,
+              "offset": 394,
+            },
+            "start": {
+              "column": 1,
+              "line": 21,
+              "offset": 375,
+            },
+          },
+          "type": "text",
+          "value": "{>max-width=100px}
+",
+        },
+        {
+          "alt": "image",
+          "position": {
+            "end": {
+              "column": 87,
+              "line": 22,
+              "offset": 480,
+            },
+            "start": {
+              "column": 1,
+              "line": 22,
+              "offset": 394,
+            },
+          },
+          "title": null,
+          "type": "image",
+          "url": "https://github.githubassets.com/assets/mona-loading-default-c3c7aad1282f.gif",
+        },
+      ],
+      "position": {
+        "end": {
+          "column": 87,
+          "line": 22,
+          "offset": 480,
+        },
+        "start": {
+          "column": 1,
+          "line": 21,
+          "offset": 375,
+        },
+      },
+      "type": "paragraph",
+    },
   ],
   "position": {
     "end": {
       "column": 9,
-      "line": 17,
-      "offset": 335,
+      "line": 23,
+      "offset": 489,
     },
     "start": {
       "column": 1,
