@@ -1,5 +1,11 @@
 # oh-markdown
 
+## 1.2.0
+
+### Minor Changes
+
+- 74a5670: feat: support custom properties
+
 ## 1.1.3
 
 ### Patch Changes
