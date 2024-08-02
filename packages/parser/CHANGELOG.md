@@ -1,5 +1,11 @@
 # oh-markdown
 
+## 1.2.2
+
+### Patch Changes
+
+- 19f774d: fix: fix custom properties for block
+
 ## 1.2.1
 
 ### Patch Changes
